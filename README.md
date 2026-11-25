@@ -50,6 +50,9 @@ progression, so they fit together. Preview first, then Create: one undo step.
    you watch the preview.
 3. Press **Create**. Undo with Cmd+Z in LUNA or the **Undo** button.
 
+The first time it opens, it asks for your language and then a short guide walks you through the
+window in it; the **Guide** button brings it back whenever you need it.
+
 ## Support
 
 If something does not work as expected, Alt-click the version number at the top of the window:

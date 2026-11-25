@@ -3,7 +3,7 @@
     "id": "com.fedetrillo.midicreator",
     "title": "MIDI Creator",
     "name": "MIDI Creator",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "manufacturer": "Fede Trillo",
     "contact": "fedetrillo@gmail.com",
     "description": ["Build a chord progression in a key, or follow the chord ruler, and write chords, arpeggios, Euclidean rhythms, bass lines and algorithmic parts on a MIDI track."],

@@ -7,7 +7,7 @@
 (() => {
   const $ = (id) => document.getElementById(id);
   const T = window.StrumTheory, G = window.MidiCreate;
-  const VERSION = '1.0.0';
+  const VERSION = '1.0.1';
   const KEY = 'com.fedetrillo.midicreator.';
   const store = {
     get: (k) => { try { return JSON.parse(localStorage.getItem(KEY + k)); } catch { return null; } },
@@ -72,6 +72,10 @@
   if (!I18N[lang]) lang = 'en';
   const t = (k, v = {}) => String(I18N[lang][k] ?? I18N.en[k] ?? k).replace(/\{(\w+)\}/g, (m, x) => (x in v ? String(v[x]) : m));
   const COLORS = ['yellow', 'orange', 'red', 'green', 'blue', 'pink', 'purple'];
+
+  // The guide: its texts, in every language.
+  for (const [c, v] of Object.entries({"en": {"help": "Quick guide", "helpBtn": "Guide", "tNext": "Next", "tBack": "Back", "tSkip": "Skip", "tDone": "Got it", "langT": "Choose your language", "langX": "The guide and the whole window will use it. You can change it later here, at the top right.", "zt": "Always at hand", "z": "Open this guide again whenever you need it with the Guide button.", "q1t": "Where it writes", "q1": "Select an instrument track in LUNA and, if you like, a range or loop. Choose whether the notes replace what is there or are added to it.", "q2t": "Key and progression", "q2": "Pick the key (or take it from LUNA), then build a progression with the chords, choose a preset, or follow LUNA’s Chord ruler.", "q3t": "What to create", "q3": "Chords, Arpeggio, Euclidean, Bass or Algorithmic: one tab each.", "q4t": "Adjust it", "q4": "The settings of the generator you picked. Every change shows at once in the preview.", "q5t": "Preview", "q5": "The notes it will write, bar by bar. Variation rolls a new take with the same settings.", "q6t": "Create", "q6": "Create writes it to the track; Undo (or Cmd+Z in LUNA) takes it back."}, "es": {"help": "Guía rápida", "helpBtn": "Guía", "tNext": "Siguiente", "tBack": "Atrás", "tSkip": "Saltar", "tDone": "Entendido", "langT": "Elige tu idioma", "langX": "La guía y toda la ventana lo usarán. Puedes cambiarlo luego aquí, arriba a la derecha.", "zt": "Siempre a mano", "z": "Vuelve a esta guía cuando la necesites con el botón Guía.", "q1t": "Dónde escribe", "q1": "Selecciona una pista de instrumento en LUNA y, si quieres, un rango o loop. Elige si las notas sustituyen lo que hay o se añaden.", "q2t": "Tono y progresión", "q2": "Elige el tono (o tómalo de LUNA) y monta una progresión con los acordes, elige una predefinida o sigue la regla de acordes de LUNA.", "q3t": "Qué crear", "q3": "Acordes, Arpegio, Euclídeo, Bajo o Algorítmico: una pestaña cada uno.", "q4t": "Ajústalo", "q4": "Los ajustes del generador elegido. Cada cambio se ve al momento en la previsualización.", "q5t": "Previsualización", "q5": "Las notas que va a escribir, compás a compás. Variación prueba otra versión con los mismos ajustes.", "q6t": "Crea", "q6": "Crear lo escribe en la pista; Deshacer (o Cmd+Z en LUNA) lo quita."}, "ca": {"help": "Guia ràpida", "helpBtn": "Guia", "tNext": "Següent", "tBack": "Enrere", "tSkip": "Saltar", "tDone": "Entesos", "langT": "Tria el teu idioma", "langX": "La guia i tota la finestra el faran servir. El pots canviar després aquí, a dalt a la dreta.", "zt": "Sempre a mà", "z": "Torna a aquesta guia quan la necessitis amb el botó Guia.", "q1t": "On escriu", "q1": "Selecciona una pista d’instrument a LUNA i, si vols, un rang o loop. Tria si les notes substitueixen el que hi ha o s’hi afegeixen.", "q2t": "To i progressió", "q2": "Tria el to (o agafa’l de LUNA) i munta una progressió amb els acords, tria’n una de predefinida o segueix el regle d’acords de LUNA.", "q3t": "Què crear", "q3": "Acords, Arpegi, Euclidià, Baix o Algorítmic: una pestanya cadascun.", "q4t": "Ajusta’l", "q4": "Els ajustos del generador triat. Cada canvi es veu a l’instant a la previsualització.", "q5t": "Previsualització", "q5": "Les notes que escriurà, compàs a compàs. Variació prova una altra versió amb els mateixos ajustos.", "q6t": "Crea", "q6": "Crear ho escriu a la pista; Desfer (o Cmd+Z a LUNA) ho treu."}, "fr": {"help": "Guide rapide", "helpBtn": "Guide", "tNext": "Suivant", "tBack": "Retour", "tSkip": "Passer", "tDone": "Compris", "langT": "Choisissez votre langue", "langX": "Le guide et toute la fenêtre l’utiliseront. Vous pourrez la changer ici, en haut à droite.", "zt": "Toujours à portée", "z": "Rouvrez ce guide quand vous voulez avec le bouton Guide.", "q1t": "Où il écrit", "q1": "Sélectionnez une piste instrument dans LUNA et, si vous voulez, une zone ou une boucle. Choisissez si les notes remplacent l’existant ou s’y ajoutent.", "q2t": "Tonalité et progression", "q2": "Choisissez la tonalité (ou prenez celle de LUNA), puis construisez une progression avec les accords, choisissez un preset ou suivez la règle d’accords de LUNA.", "q3t": "Quoi créer", "q3": "Accords, Arpège, Euclidien, Basse ou Algorithmique : un onglet chacun.", "q4t": "Réglez-le", "q4": "Les réglages du générateur choisi. Chaque changement apparaît aussitôt dans l’aperçu.", "q5t": "Aperçu", "q5": "Les notes qu’il va écrire, mesure par mesure. Variation propose une autre version avec les mêmes réglages.", "q6t": "Créez", "q6": "Créer l’écrit sur la piste ; Annuler (ou Cmd+Z dans LUNA) le retire."}, "de": {"help": "Kurzanleitung", "helpBtn": "Anleitung", "tNext": "Weiter", "tBack": "Zurück", "tSkip": "Überspringen", "tDone": "Verstanden", "langT": "Wähle deine Sprache", "langX": "Die Anleitung und das ganze Fenster verwenden sie. Du kannst sie später hier oben rechts ändern.", "zt": "Immer zur Hand", "z": "Öffne diese Anleitung jederzeit wieder mit dem Button Anleitung.", "q1t": "Wohin es schreibt", "q1": "Wähle in LUNA eine Instrumentspur und, wenn du willst, einen Bereich oder Loop. Leg fest, ob die Noten das Vorhandene ersetzen oder dazukommen.", "q2t": "Tonart und Akkordfolge", "q2": "Wähl die Tonart (oder übernimm sie aus LUNA) und bau eine Folge aus den Akkorden, nimm eine Vorlage oder folge LUNAs Akkordlineal.", "q3t": "Was entsteht", "q3": "Akkorde, Arpeggio, Euklidisch, Bass oder Algorithmisch: je ein Tab.", "q4t": "Einstellen", "q4": "Die Einstellungen des gewählten Generators. Jede Änderung erscheint sofort in der Vorschau.", "q5t": "Vorschau", "q5": "Die Noten, die geschrieben werden, Takt für Takt. Variation würfelt eine neue Version mit denselben Einstellungen.", "q6t": "Erzeugen", "q6": "Erzeugen schreibt es auf die Spur; Rückgängig (oder Cmd+Z in LUNA) nimmt es zurück."}, "it": {"help": "Guida rapida", "helpBtn": "Guida", "tNext": "Avanti", "tBack": "Indietro", "tSkip": "Salta", "tDone": "Capito", "langT": "Scegli la tua lingua", "langX": "La guida e tutta la finestra la useranno. Puoi cambiarla poi qui, in alto a destra.", "zt": "Sempre a portata di mano", "z": "Riapri questa guida quando ti serve con il pulsante Guida.", "q1t": "Dove scrive", "q1": "Seleziona una traccia strumento in LUNA e, se vuoi, un intervallo o un loop. Scegli se le note sostituiscono ciò che c’è o si aggiungono.", "q2t": "Tonalità e progressione", "q2": "Scegli la tonalità (o prendila da LUNA), poi costruisci una progressione con gli accordi, scegline una pronta o segui il righello accordi di LUNA.", "q3t": "Cosa creare", "q3": "Accordi, Arpeggio, Euclideo, Basso o Algoritmico: una scheda ciascuno.", "q4t": "Regolalo", "q4": "Le impostazioni del generatore scelto. Ogni modifica si vede subito nell’anteprima.", "q5t": "Anteprima", "q5": "Le note che scriverà, battuta per battuta. Variazione prova un’altra versione con le stesse impostazioni.", "q6t": "Crea", "q6": "Crea lo scrive sulla traccia; Annulla (o Cmd+Z in LUNA) lo toglie."}, "pt": {"help": "Guia rápido", "helpBtn": "Guia", "tNext": "Seguinte", "tBack": "Voltar", "tSkip": "Saltar", "tDone": "Percebi", "langT": "Escolhe o teu idioma", "langX": "O guia e toda a janela vão usá-lo. Podes mudá-lo depois aqui, em cima à direita.", "zt": "Sempre à mão", "z": "Volta a este guia quando precisares com o botão Guia.", "q1t": "Onde escreve", "q1": "Seleciona uma faixa de instrumento no LUNA e, se quiseres, um intervalo ou loop. Escolhe se as notas substituem o que lá está ou se juntam.", "q2t": "Tom e progressão", "q2": "Escolhe o tom (ou tira-o do LUNA) e monta uma progressão com os acordes, escolhe uma predefinida ou segue a régua de acordes do LUNA.", "q3t": "O que criar", "q3": "Acordes, Arpejo, Euclidiano, Baixo ou Algorítmico: um separador cada.", "q4t": "Ajusta-o", "q4": "As definições do gerador escolhido. Cada mudança aparece logo na pré-visualização.", "q5t": "Pré-visualização", "q5": "As notas que vai escrever, compasso a compasso. Variação experimenta outra versão com as mesmas definições.", "q6t": "Cria", "q6": "Criar escreve-o na faixa; Desfazer (ou Cmd+Z no LUNA) retira-o."}})) Object.assign(I18N[c], v);
+  let tour = null;
   let theme = store.get('theme') === 'grey' ? 'grey' : 'dark';
   let color = COLORS.includes(store.get('color')) ? store.get('color') : 'purple';
   let statusTimer;
@@ -326,6 +330,7 @@
   const closeColors = () => { $('colorMenu').hidden = true; $('colorBtn').classList.remove('open'); };
   function paintStatic() {
     document.documentElement.lang = lang;
+    $('help').title = t('help'); $('help').setAttribute('aria-label', t('help')); { const q = document.createElement('b'); q.textContent = '?'; const sp = document.createElement('span'); sp.textContent = t('helpBtn'); $('help').replaceChildren(q, sp); }
     document.documentElement.dataset.theme = theme;
     document.documentElement.dataset.color = color;
     $('ver').textContent = `v${VERSION}`;
@@ -562,5 +567,25 @@
     await luna.sessions.ready();
     luna.sessions.focused.onChange(() => void build());
     await build();
+    tour ??= window.AddOnTour?.attach({
+      button: $('help'), key: `${KEY}tourSeen`,
+      labels: () => ({ next: t('tNext'), back: t('tBack'), skip: t('tSkip'), done: t('tDone') }),
+      language: {
+        sel: '#lang',
+        list: () => Object.keys(I18N).map((c) => [c, I18N[c]._name]),
+        current: () => lang,
+        set: (c) => { $('lang').value = c; $('lang').dispatchEvent(new Event('change')); },
+        title: () => t('langT'), text: () => t('langX'),
+      },
+      steps: () => [
+        { sel: '#target', title: () => t('q1t'), text: () => t('q1') },
+        { sel: '#prog', title: () => t('q2t'), text: () => t('q2') },
+        { sel: '#tabs', title: () => t('q3t'), text: () => t('q3') },
+        { sel: '#params', title: () => t('q4t'), text: () => t('q4') },
+        { sel: '#preview', title: () => t('q5t'), text: () => t('q5') },
+        { sel: '.actions', title: () => t('q6t'), text: () => t('q6') },
+        { sel: '#help', title: () => t('zt'), text: () => t('z') },
+      ],
+    });
   })();
 })();
