@@ -7,7 +7,7 @@
 (() => {
   const $ = (id) => document.getElementById(id);
   const T = window.StrumTheory, G = window.MidiCreate;
-  const VERSION = '1.0.1';
+  const VERSION = '1.0.2';
   const KEY = 'com.fedetrillo.midicreator.';
   const store = {
     get: (k) => { try { return JSON.parse(localStorage.getItem(KEY + k)); } catch { return null; } },
@@ -550,7 +550,7 @@
       if (!ev.altKey) return;
       const sp = span();
       const text = JSON.stringify({ version: VERSION, kind, opts: opts[kind], prog, span: sp, track: track()?.name.value, ruler: rulerList(), log }, null, 2);
-      try { await navigator.clipboard.writeText(text); say('report', {}, 'ok', 2500); } catch { /* nothing */ }
+      try { if (await AddOnCopy(text)) say('report', {}, 'ok', 5000); } catch { /* nothing */ }
     };
     for (const p of [ctx.selectionStart, ctx.selectionStop, ctx.selectionTracks, ctx.lastSelectedTrack, tr.loopStart, tr.loopStop, tr.playStart]) p?.onChange?.(() => relabel());
     s.musical.chords?.onChange?.(() => { if (prog.src === 'ruler') paintProg(); });

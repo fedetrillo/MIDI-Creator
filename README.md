@@ -1,9 +1,8 @@
 # MIDI Creator for LUNA
 
-Build a chord progression in a key, or follow LUNA's chord ruler, and write chords, arpeggios,
-Euclidean rhythms, a bass line or algorithmic parts (Fibonacci, cellular automata, L-systems,
-chaos, phasing, tintinnabuli…) from it on a MIDI track. Every part follows the same
-progression, so they fit together. Preview first, then Create: one undo step.
+From a key to a full MIDI part in seconds. Build a progression (or follow LUNA's Chord ruler)
+and write chords, arpeggios, bass lines, Euclidean rhythms or generative melodies, always in
+key, with a live preview before anything touches your track.
 
 <p>
   <img src="docs/screenshot-dark.png" alt="MIDI Creator, dark theme" width="460">
